@@ -6,8 +6,9 @@ class HobbySearchController extends ChangeNotifier {
   final Set<int> uniqueIds = {};
   bool _isLoading = false;
   String? _error;
+  List<dynamic> _currentResults = [];
 
-  List<dynamic> get results => _results;
+  List<dynamic> get results => _currentResults;
   bool get isLoading => _isLoading;
   String? get error => _error;
 
@@ -20,6 +21,7 @@ class HobbySearchController extends ChangeNotifier {
       final hobbies = await Hobby.getHobbies();
       _results.clear();
       _results.addAll(hobbies);
+      _currentResults = List.from(_results);
     } catch (e) {
       _error = e.toString();
     } finally {
@@ -28,9 +30,12 @@ class HobbySearchController extends ChangeNotifier {
     }
   }
 
-
   Future<void> search(String query) async {
-    if (query.isEmpty) return;
+    if (query.isEmpty) {
+      _currentResults = List.from(_results);
+      notifyListeners();
+      return;
+    }
 
     _isLoading = true;
     _error = null;
@@ -54,8 +59,7 @@ class HobbySearchController extends ChangeNotifier {
         }
       }
 
-      _results.clear();
-      _results.addAll(uniqueResults);
+      _currentResults = uniqueResults;
     } catch (e) {
       _error = e.toString();
     } finally {
@@ -64,8 +68,8 @@ class HobbySearchController extends ChangeNotifier {
     }
   }
 
-   void sortByDate() {
-    _results.sort((a, b) {
+  void sortByDate() {
+    _currentResults.sort((a, b) {
       DateTime dateA = DateTime.parse(a['release_date']);
       DateTime dateB = DateTime.parse(b['release_date']);
       return dateB.compareTo(dateA);
@@ -73,9 +77,8 @@ class HobbySearchController extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Méthode pour trier par ordre alphabétique
   void sortByAlphabeticalOrder() {
-    _results.sort((a, b) {
+    _currentResults.sort((a, b) {
       String nameA = a['name'].toString().toLowerCase();
       String nameB = b['name'].toString().toLowerCase();
       return nameA.compareTo(nameB);
@@ -84,12 +87,11 @@ class HobbySearchController extends ChangeNotifier {
   }
 
   void sortByRating() {
-    _results.sort((a, b) {
-      double ratingA = a['rating'];
-      double ratingB = b['rating'];
+    _currentResults.sort((a, b) {
+    double ratingA = (a['rating'] is int) ? (a['rating'] as int).toDouble() : a['rating'];
+    double ratingB = (b['rating'] is int) ? (b['rating'] as int).toDouble() : b['rating'];
       return ratingB.compareTo(ratingA);
     });
     notifyListeners();
   }
-
 }
