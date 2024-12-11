@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:front/app.controller/search_controller.dart';
 import 'package:front/common_widget/custom_search_bar.dart';
 import 'package:front/common_widget/search_results.dart';
+import 'package:front/common_widget/sort_search_bar.dart';
 import 'package:provider/provider.dart';
 
 class SearchPage extends StatefulWidget {
@@ -53,6 +54,7 @@ class _SearchPageState extends State<SearchPage> {
                   ? _loadAllHobbies() 
                   : _searchProvider.search(query),
               ),
+              const SortSearch(),
               const SizedBox(height: 16),
               Expanded(
                 child: Consumer<HobbySearchController>(
