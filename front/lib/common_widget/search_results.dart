@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front/app.detail/detail_page.dart';
 
 class SearchResults extends StatelessWidget {
   final List<dynamic> results;
@@ -34,6 +35,14 @@ class SearchResults extends StatelessWidget {
           title: Text(hobby['name']),
           subtitle: Text(hobby['type']),
           trailing: Text('Rating: ${hobby['rating']}'),
+          onTap: () {
+            Navigator.push(
+              context, MaterialPageRoute(
+                builder: (context) =>
+                 DetailPage(id: hobby['id'],)
+              ),
+            );
+          },
         );
       },
     );
