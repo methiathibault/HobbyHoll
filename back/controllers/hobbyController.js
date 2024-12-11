@@ -2,16 +2,17 @@ const e = require('express');
 const hobby = require('../models/hobby.js');
 
 exports.createHobby = async(req, res) => {
-    const { name, type, description, rating } = req.body;
+    const { name, type, description, rating, release_date } = req.body;
 
     try {
         await hobby.create({
             name: name,
             type: type,
             description: description,
-            rating: rating
+            rating: rating,
+            release_date: release_date
         });
-        res.status(201).json({ message: `Hobby created: \n{ name: ${name}, type: ${type}, description: ${description}, rating: ${rating} }` });
+        res.status(201).json({ message: `Hobby created: \n{ name: ${name}, type: ${type}, description: ${description}, rating: ${rating}, release_date: ${release_date} }` });
     } catch (error) {
         res.status(500).json({ error });
         console.error(error);
