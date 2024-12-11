@@ -63,4 +63,24 @@ class HobbySearchController extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+   void sortByDate() {
+    _results.sort((a, b) {
+      DateTime dateA = DateTime.parse(a['release_date']);
+      DateTime dateB = DateTime.parse(b['release_date']);
+      return dateA.compareTo(dateB);
+    });
+    notifyListeners();
+  }
+
+  // Méthode pour trier par ordre alphabétique
+  void sortByAlphabeticalOrder() {
+    _results.sort((a, b) {
+      String nameA = a['name'].toString().toLowerCase();
+      String nameB = b['name'].toString().toLowerCase();
+      return nameA.compareTo(nameB);
+    });
+    notifyListeners();
+  }
+
 }
