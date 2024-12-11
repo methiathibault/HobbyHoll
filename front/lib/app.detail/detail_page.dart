@@ -6,7 +6,7 @@ class DetailPage extends StatefulWidget {
     super.key,
     required this.id,
     });
-    final double id;
+    final int id;
 
   @override
   State<DetailPage> createState() => _DetailPageState();
@@ -21,10 +21,11 @@ class _DetailPageState extends State<DetailPage> {
     _objects = Hobby.getHobby(widget.id.toString());
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Detail Page'),
+        title: const Text('Detail Page'),
       ),
       body: FutureBuilder(
         future: _objects,
@@ -41,23 +42,11 @@ class _DetailPageState extends State<DetailPage> {
               Text("DESCRIPTION : ${snapshot.data!["description"]}"),
             ],
           );
-          }else{
-            return const Center(child: Text("Pad de data"),);
+          } else {
+            return const Center(child: Text("Pas de data"));
           }
         }
        )
     );
   }
 }
-
-// Column(
-//         mainAxisAlignment: MainAxisAlignment.center,
-//         crossAxisAlignment: CrossAxisAlignment.stretch,
-//         children: [
-//           Image.asset("images/book.jpg"),
-//           Text("TITRE: "),
-//           Text("TYPE: "),
-//           Text("NOTE : "),
-//           Text("DESCRIPTION : "),
-//         ],
-//       ),
