@@ -64,6 +64,7 @@ class _SearchPageState extends State<SearchPage> {
                   ? _loadAllHobbies() 
                   : _searchProvider.search(query),
               ),
+              const SizedBox(height: 16),
               const SortSearch(),
               const SizedBox(height: 16),
               Expanded(

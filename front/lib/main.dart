@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front/app.theme/app_theme.dart';
 import 'package:front/app.list/search_page.dart';
 
 void main() {
@@ -8,17 +9,13 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-   return MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "HOBBY HALL",
-      theme: ThemeData(
-        primaryColor: Colors.amber,
-      ),
+      title: 'HOBBY HALL',
+      theme: AppTheme.lightTheme,
       home: const SearchPage(),
     );
   }
 }
-

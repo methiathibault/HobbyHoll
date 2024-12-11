@@ -9,7 +9,7 @@ class SortSearch extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Provider.of<HobbySearchController>(context, listen: false);
     return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         const Text("Sort by: "),
         ElevatedButton(
@@ -22,8 +22,14 @@ class SortSearch extends StatelessWidget {
           onPressed: () {
             controller.sortByAlphabeticalOrder();  // Trie par ordre alphabétique
           },
-          child: const Text("Alphabetical Order"),
+          child: const Text("A-Z"),
         ),
+        ElevatedButton(
+          onPressed: () {
+            controller.sortByRating();  // Trie par note
+          },
+          child: const Text("Rating"),
+        )
       ],
     );
   }
