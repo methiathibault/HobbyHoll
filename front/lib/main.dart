@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:front/app.menu/menu_main_page.dart';
+import 'package:front/app.list/search_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.amber,
       ),
-      home: const MainMenuPage(),
+      home: const SearchPage(),
     );
   }
 }

@@ -32,7 +32,7 @@ class Hobby {
 
   static Future<List<dynamic>> getHobbiesByName(String name) async {
     try {
-      var response = await http.get(Uri.parse("$baseUrl/search/$name"));
+      var response = await http.get(Uri.parse("$baseUrl/searchByName/$name"));
       if (response.statusCode == 200) {
         return jsonDecode(response.body);
       } else {
@@ -45,7 +45,7 @@ class Hobby {
 
   static Future<List<dynamic>> getHobbiesByType(String type) async {
     try {
-      var response = await http.get(Uri.parse("$baseUrl/search/$type"));
+      var response = await http.get(Uri.parse("$baseUrl/searchByType/$type"));
       if (response.statusCode == 200) {
         return jsonDecode(response.body);
       } else {
