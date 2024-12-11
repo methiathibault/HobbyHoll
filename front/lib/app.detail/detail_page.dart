@@ -22,12 +22,11 @@ class _DetailPageState extends State<DetailPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Image.asset("image"),
-          Text("nom du livre"),
-          Text("type du livre"),
-          Text("autheur du livre"),
-          Text("date de sortie du livre"),
-          Text("description du livre"),
+          Image.asset("images/book.jpg"),
+          Text("TITRE: "),
+          Text("TYPE: "),
+          Text("NOTE : "),
+          Text("DESCRIPTION : "),
         ],
       ),
     );
