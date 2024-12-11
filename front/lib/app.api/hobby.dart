@@ -55,4 +55,27 @@ class Hobby {
       return Future.error(e.toString());
     }
   }
+
+  static Future<void> addHobby(String name, String type, double rating, String description, String releaseDate) async {
+    try {
+      var response = await http.post(
+        Uri.parse("$baseUrl/"),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          "name": name,
+          "type": type,
+          "rating": rating,
+          "description": description,
+          "release_date": releaseDate,
+        }),
+      );
+      if (response.statusCode != 201) {
+        return Future.error("Failed to add hobby");
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
 }

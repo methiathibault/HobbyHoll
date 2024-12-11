@@ -40,6 +40,7 @@ class _DetailPageState extends State<DetailPage> {
               Text("TYPE: ${snapshot.data!["type"]}"),
               Text("NOTE : ${snapshot.data!["rating"]}"),
               Text("DESCRIPTION : ${snapshot.data!["description"]}"),
+              Text("DATE DE SORTIE : ${DateTime.parse(snapshot.data!["release_date"]).toString().split(' ')[0]}"),
             ],
           );
           } else {

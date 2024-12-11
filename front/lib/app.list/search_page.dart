@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:front/app.controller/search_controller.dart';
+import 'package:front/app.list/add_hobby_page.dart';
 import 'package:front/common_widget/custom_search_bar.dart';
 import 'package:front/common_widget/search_results.dart';
 import 'package:provider/provider.dart';
@@ -43,6 +44,15 @@ class _SearchPageState extends State<SearchPage> {
       value: _searchProvider,
       child: Scaffold(
         appBar: AppBar(title: const Text('HobbyHoll')),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const AddHobbyPage()),
+            );
+          },
+          child: const Icon(Icons.add),
+        ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
