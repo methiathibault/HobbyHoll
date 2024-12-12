@@ -15,7 +15,7 @@ A hobby tracking application built with Flutter and Express.js
 
 1. Clone the repository and navigate to backend:
 ```bash
-git clone <repository-url>
+git clone git@github.com:methiathibault/HobbyHoll.git
 cd back
 ```
 
@@ -46,11 +46,18 @@ Server runs at http://localhost:3001
 ### Frontend (Flutter)
 
 1. Navigate to frontend directory:
+```bash
+cd front
+```
 
 2. Install dependencies:
-
+```bash
+flutter pub get
+```
 3. Run the app:
-
+```bash
+flutter run
+```
 ### Features
 - Create, read, update and delete hobbies
 - Search by name or type
