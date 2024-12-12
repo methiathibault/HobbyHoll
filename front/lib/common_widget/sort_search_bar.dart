@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:front/app.controller/search_controller.dart';
+import 'package:front/app.list/top_five_page.dart';
 import 'package:provider/provider.dart';
+import 'package:front/app.controller/search_controller.dart';
+
+enum SortOption {
+  all,
+  date,
+  alphabetical,
+  rating
+}
 
 class SortSearch extends StatelessWidget {
   const SortSearch({super.key});
@@ -8,28 +16,66 @@ class SortSearch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Provider.of<HobbySearchController>(context, listen: false);
+    
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         const Text("Sort by: "),
-        ElevatedButton(
-          onPressed: () {
-            controller.sortByDate();  // Trie par date
-          },
-          child: const Text("Date"),
+        const SizedBox(width: 8),
+        Expanded(
+          child: DropdownButtonFormField<SortOption>(
+            value: SortOption.all, // Set default value
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            ),
+            items: const [
+              DropdownMenuItem(
+                value: SortOption.all,
+                child: Text('All'),
+              ),
+              DropdownMenuItem(
+                value: SortOption.date,
+                child: Text('Date'),
+              ),
+              DropdownMenuItem(
+                value: SortOption.alphabetical,
+                child: Text('A-Z'),
+              ),
+              DropdownMenuItem(
+                value: SortOption.rating,
+                child: Text('Rating'),
+              ),
+            ],
+            onChanged: (SortOption? value) {
+              if (value == null) return;
+              
+              switch (value) {
+                case SortOption.all:
+                  controller.loadAllHobbies();
+                  break;
+                case SortOption.date:
+                  controller.sortByDate();
+                  break;
+                case SortOption.alphabetical:
+                  controller.sortByAlphabeticalOrder();
+                  break;
+                case SortOption.rating:
+                  controller.sortByRating();
+                  break;
+              }
+            },
+          ),
         ),
+        const SizedBox(width: 8),
         ElevatedButton(
           onPressed: () {
-            controller.sortByAlphabeticalOrder();  // Trie par ordre alphabétique
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const TopFivePage()),
+            );
           },
-          child: const Text("A-Z"),
+          child: const Text("Top 5"),
         ),
-        ElevatedButton(
-          onPressed: () {
-            controller.sortByRating();  // Trie par note
-          },
-          child: const Text("Rating"),
-        )
       ],
     );
   }

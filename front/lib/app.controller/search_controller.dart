@@ -94,4 +94,29 @@ class HobbySearchController extends ChangeNotifier {
     });
     notifyListeners();
   }
+
+  void getTopFiveByType({String? filterType}) {
+    Map<String, List<dynamic>> groupedHobbies = {};
+    for (var hobby in _results) {
+      String type = hobby['type'];
+      if (filterType != null && type != filterType) continue;
+      if (!groupedHobbies.containsKey(type)) {
+        groupedHobbies[type] = [];
+      }
+      groupedHobbies[type]!.add(hobby);
+    }
+
+    List<dynamic> topHobbies = [];
+    groupedHobbies.forEach((type, hobbies) {
+      hobbies.sort((a, b) {
+        double ratingA = (a['rating'] is int) ? (a['rating'] as int).toDouble() : a['rating'];
+        double ratingB = (b['rating'] is int) ? (b['rating'] as int).toDouble() : b['rating'];
+        return ratingB.compareTo(ratingA);
+      });
+      topHobbies.addAll(hobbies.take(5));
+    });
+
+    _currentResults = topHobbies;
+    notifyListeners();
+  }
 }
